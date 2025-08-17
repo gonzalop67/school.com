@@ -22,5 +22,5 @@
 @endsection
 
 @section('script')
-    <script type="text/javascript" src="{{ url('public/js/demo_tables.js') }}"></script>
+
 @endsection

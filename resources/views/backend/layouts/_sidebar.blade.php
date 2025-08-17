@@ -28,7 +28,7 @@
             <a href="{{ url('panel/dashboard') }}"><span class="fa fa-desktop"></span> <span class="xn-text">Dashboard</span></a>
         </li>
 
-        <li>
+        <li class="{{ (Request::segment(2) == 'school') ? 'active' : '' }}">
             <a href="{{ url('panel/school') }}"><span class="fa fa-user"></span> <span class="xn-text">School</span></a>
         </li>
 
