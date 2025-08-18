@@ -49,7 +49,8 @@
                                             <td>{{ $value->id }}</td>
                                             <td>
                                                 @if (!empty($value->getProfile()))
-                                                    <img style="border: 0; width: 50px; border-radius: 50%;" src="{{ $value->getProfile() }}" alt="">
+                                                    <img style="border: 0; width: 50px; border-radius: 50%;"
+                                                        src="{{ $value->getProfile() }}" alt="">
                                                 @endif
                                             </td>
                                             <td>{{ $value->name }}</td>
@@ -66,11 +67,11 @@
                                                 {{ date('d-m-Y H:i A', strtotime($value->created_at)) }}
                                             </td>
                                             <td>
-                                                <button class="btn btn-default btn-rounded btn-sm"><span
-                                                        class="fa fa-pencil"></span></button>
-                                                <button class="btn btn-danger btn-rounded btn-sm"
-                                                    onClick="delete_row('trow_1');"><span
-                                                        class="fa fa-times"></span></button>
+                                                <a href="{{ url('panel/school/edit/' . $value->id) }}"
+                                                    class="btn btn-default btn-rounded btn-sm"><span
+                                                        class="fa fa-pencil"></span></a>
+                                                <a href="{{ url('panel/school/delete/' . $value->id) }}" onclick="return confirm('Are you sure do you want to delete?');" class="btn btn-danger btn-rounded btn-sm"
+                                                    onClick="delete_row('trow_1');"><span class="fa fa-times"></span></a>
                                             </td>
                                         </tr>
                                     @endforeach

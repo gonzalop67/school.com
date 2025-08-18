@@ -46,6 +46,11 @@ class User extends Authenticatable
         ];
     }
 
+    static function getSingle(string $id)
+    {
+        return User::find($id);
+    }
+
     static function getSchool()
     {
         return self::select('*')
