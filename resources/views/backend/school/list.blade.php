@@ -20,6 +20,54 @@
         <div class="row">
             <div class="col-md-12">
                 @include('_message')
+
+                <div class="panel panel-default">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">School Search</h3>
+                    </div>
+
+                    <div class="panel-body">
+                        <form action="" method="GET">
+                            <div class="col-md-2">
+                                <label>ID</label>
+                                <input type="text" name="id" class="form-control" placeholder="ID"
+                                    value="{{ Request::get('id') }}">
+                            </div>
+                            <div class="col-md-2">
+                                <label>School Name</label>
+                                <input type="text" name="name" class="form-control" placeholder="School Name"
+                                    value="{{ Request::get('name') }}">
+                            </div>
+                            <div class="col-md-2">
+                                <label>Email</label>
+                                <input type="text" name="email" class="form-control" placeholder="Email"
+                                    value="{{ Request::get('email') }}">
+                            </div>
+                            <div class="col-md-2">
+                                <label>Address</label>
+                                <input type="text" name="address" class="form-control" placeholder="Address"
+                                    value="{{ Request::get('address') }}">
+                            </div>
+                            <div class="col-md-2">
+                                <label>Status</label>
+                                <select class="form-control" name="status">
+                                    <option value="">Select</option>
+                                    <option {{ (Request::get('status') == '1' ? 'selected' : '') }} value="1">Active</option>
+                                    <option {{ (Request::get('status') == '100' ? 'selected' : '') }} value="100">Inactive</option>
+                                </select>
+                            </div>
+
+                            <div style="clear: both;"></div>
+                            <br>
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary">Search</button>
+                                <a href="{{ url('panel/school') }}" class="btn btn-success">Reset</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
                 <div class="panel panel-default">
 
                     <div class="panel-heading">
@@ -44,7 +92,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($getSchool as $value)
+                                    @forelse ($getSchool as $value)
                                         <tr>
                                             <td>{{ $value->id }}</td>
                                             <td>
@@ -70,16 +118,26 @@
                                                 <a href="{{ url('panel/school/edit/' . $value->id) }}"
                                                     class="btn btn-default btn-rounded btn-sm"><span
                                                         class="fa fa-pencil"></span></a>
-                                                <a href="{{ url('panel/school/delete/' . $value->id) }}" onclick="return confirm('Are you sure do you want to delete?');" class="btn btn-danger btn-rounded btn-sm"
+                                                <a href="{{ url('panel/school/delete/' . $value->id) }}"
+                                                    onclick="return confirm('Are you sure do you want to delete?');"
+                                                    class="btn btn-danger btn-rounded btn-sm"
                                                     onClick="delete_row('trow_1');"><span class="fa fa-times"></span></a>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                    @empty
+                                    <tr>
+                                        <td colspan="100%">Record not found.</td>
+                                    </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
 
                     </div>
+                </div>
+
+                <div class="pull-right">
+                    {{ $getSchool->appends(Illuminate\Support\Facades\Request::except('page'))->links() }}
                 </div>
 
             </div>
