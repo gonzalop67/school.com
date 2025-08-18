@@ -14,6 +14,12 @@
     <!-- CSS INCLUDE -->
     <link rel="stylesheet" type="text/css" id="theme" href="{{ url('public/css/theme-default.css') }}" />
     <!-- EOF CSS INCLUDE -->
+
+    <style>
+        .required {
+            color: red;
+        }
+    </style>
 </head>
 
 <body>

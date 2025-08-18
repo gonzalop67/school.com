@@ -19,6 +19,7 @@
         <!-- START RESPONSIVE TABLES -->
         <div class="row">
             <div class="col-md-12">
+                @include('_message')
                 <div class="panel panel-default">
 
                     <div class="panel-heading">
@@ -32,54 +33,47 @@
                             <table class="table table-bordered table-striped table-actions">
                                 <thead>
                                     <tr>
-                                        <th>id</th>
-                                        <th>name</th>
-                                        <th>status</th>
-                                        <th>amount</th>
-                                        <th>date</th>
-                                        <th>actions</th>
+                                        <th>#</th>
+                                        <th>Profile</th>
+                                        <th>School Name</th>
+                                        <th>Email</th>
+                                        <th>Address</th>
+                                        <th>Status</th>
+                                        <th>Created Date</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr id="trow_1">
-                                        <td class="text-center">1</td>
-                                        <td><strong>John Doe</strong></td>
-                                        <td><span class="label label-success">New</span></td>
-                                        <td>$430.20</td>
-                                        <td>24/09/2014</td>
-                                        <td>
-                                            <button class="btn btn-default btn-rounded btn-sm"><span
-                                                    class="fa fa-pencil"></span></button>
-                                            <button class="btn btn-danger btn-rounded btn-sm"
-                                                onClick="delete_row('trow_1');"><span class="fa fa-times"></span></button>
-                                        </td>
-                                    </tr>
-                                    <tr id="trow_2">
-                                        <td class="text-center">2</td>
-                                        <td><strong>Dmitry Ivaniuk</strong></td>
-                                        <td><span class="label label-warning">Pending</span></td>
-                                        <td>$1,351.00</td>
-                                        <td>23/09/2014</td>
-                                        <td>
-                                            <button class="btn btn-default btn-rounded btn-sm"><span
-                                                    class="fa fa-pencil"></span></button>
-                                            <button class="btn btn-danger btn-rounded btn-sm"
-                                                onClick="delete_row('trow_2');"><span class="fa fa-times"></span></button>
-                                        </td>
-                                    </tr>
-                                    <tr id="trow_3">
-                                        <td class="text-center">3</td>
-                                        <td><strong>Nadia Ali</strong></td>
-                                        <td><span class="label label-info">In Queue</span></td>
-                                        <td>$2,621.00</td>
-                                        <td>22/09/2014</td>
-                                        <td>
-                                            <button class="btn btn-default btn-rounded btn-sm"><span
-                                                    class="fa fa-pencil"></span></button>
-                                            <button class="btn btn-danger btn-rounded btn-sm"
-                                                onClick="delete_row('trow_3');"><span class="fa fa-times"></span></button>
-                                        </td>
-                                    </tr>
+                                    @foreach ($getSchool as $value)
+                                        <tr>
+                                            <td>{{ $value->id }}</td>
+                                            <td>
+                                                @if (!empty($value->getProfile()))
+                                                    <img style="border: 0; width: 50px; border-radius: 50%;" src="{{ $value->getProfile() }}" alt="">
+                                                @endif
+                                            </td>
+                                            <td>{{ $value->name }}</td>
+                                            <td>{{ $value->email }}</td>
+                                            <td>{{ $value->address }}</td>
+                                            <td>
+                                                @if ($value->status == 1)
+                                                    <span class="label label-success">Active</span>
+                                                @else
+                                                    <span class="label label-danger">Inactive</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                {{ date('d-m-Y H:i A', strtotime($value->created_at)) }}
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-default btn-rounded btn-sm"><span
+                                                        class="fa fa-pencil"></span></button>
+                                                <button class="btn btn-danger btn-rounded btn-sm"
+                                                    onClick="delete_row('trow_1');"><span
+                                                        class="fa fa-times"></span></button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
