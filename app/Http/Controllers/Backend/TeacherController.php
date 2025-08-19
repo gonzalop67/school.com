@@ -13,6 +13,7 @@ class TeacherController extends Controller
 {
     public function teacher_list()
     {
+        $data['getRecord'] = User::getTeacher(Auth::user()->id, Auth::user()->is_admin);
         $data['meta_title'] = "Teacher";
         return view('backend.teacher.list', $data);
     }
