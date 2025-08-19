@@ -20,7 +20,7 @@ class AuthController extends Controller
     public function auth_login(Request $request)
     {
         // $remember = !empty($request->remember);
-        if (Auth::attempt(['email'=>$request->email, 'password'=>$request->password], true)) {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'is_delete' => 0], true)) {
             return redirect('panel/dashboard');
         } else {
             return redirect()->back()->with('error', "Please enter correct email and password");
