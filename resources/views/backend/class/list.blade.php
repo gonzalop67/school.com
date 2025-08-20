@@ -4,13 +4,13 @@
     <!-- START BREADCRUMB -->
     <ul class="breadcrumb">
         <li><a href="#">Home</a></li>
-        <li class="active">Admin</li>
+        <li class="active">Class</li>
     </ul>
     <!-- END BREADCRUMB -->
 
     <!-- PAGE TITLE -->
     <div class="page-title">
-        <h2><span class="fa fa-arrow-circle-o-left"></span> Admin</h2>
+        <h2><span class="fa fa-arrow-circle-o-left"></span> Class</h2>
     </div>
     <!-- END PAGE TITLE -->
 
@@ -24,7 +24,7 @@
                 <div class="panel panel-default">
 
                     <div class="panel-heading">
-                        <h3 class="panel-title">Admin Search</h3>
+                        <h3 class="panel-title">Class Search</h3>
                     </div>
 
                     <div class="panel-body">
@@ -40,24 +40,6 @@
                                     value="{{ Request::get('name') }}">
                             </div>
                             <div class="col-md-2">
-                                <label>Email</label>
-                                <input type="text" name="email" class="form-control" placeholder="Email"
-                                    value="{{ Request::get('email') }}">
-                            </div>
-                            <div class="col-md-2">
-                                <label>Address</label>
-                                <input type="text" name="address" class="form-control" placeholder="Address"
-                                    value="{{ Request::get('address') }}">
-                            </div>
-                            <div class="col-md-2">
-                                <label>Role</label>
-                                <select class="form-control" name="is_admin">
-                                    <option value="">Select</option>
-                                    <option {{ (Request::get('status') == '1' ? 'selected' : '') }} value="1">Super Admin</option>
-                                    <option {{ (Request::get('status') == '2' ? 'selected' : '') }} value="2">Admin</option>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
                                 <label>Status</label>
                                 <select class="form-control" name="status">
                                     <option value="">Select</option>
@@ -70,7 +52,7 @@
                             <br>
                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-primary">Search</button>
-                                <a href="{{ url('panel/admin') }}" class="btn btn-success">Reset</a>
+                                <a href="{{ url('panel/class') }}" class="btn btn-success">Reset</a>
                             </div>
                         </form>
                     </div>
@@ -79,8 +61,8 @@
                 <div class="panel panel-default">
 
                     <div class="panel-heading">
-                        <h3 class="panel-title">Admin List</h3>
-                        <a class="btn btn-primary pull-right" href="{{ url('panel/admin/create') }}">Create Admin</a>
+                        <h3 class="panel-title">Class List</h3>
+                        <a class="btn btn-primary pull-right" href="{{ url('panel/class/create') }}">Create Class</a>
                     </div>
 
                     <div class="panel-body panel-body-table">
@@ -90,11 +72,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Profile</th>
                                         <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Address</th>
-                                        <th>Role</th>
                                         <th>Status</th>
                                         <th>Created Date</th>
                                         <th>Action</th>
@@ -104,22 +82,7 @@
                                     @forelse ($getRecord as $value)
                                         <tr>
                                             <td>{{ $value->id }}</td>
-                                            <td>
-                                                @if (!empty($value->getProfile()))
-                                                    <img style="border: 0; width: 50px; border-radius: 50%;"
-                                                        src="{{ $value->getProfile() }}" alt="">
-                                                @endif
-                                            </td>
                                             <td>{{ $value->name }}</td>
-                                            <td>{{ $value->email }}</td>
-                                            <td>{{ $value->address }}</td>
-                                            <td>
-                                                @if ($value->is_admin == 1)
-                                                    <span class="label label-success">Super Admin</span>
-                                                @else
-                                                    <span class="label label-warning">Admin</span>
-                                                @endif
-                                            </td>
                                             <td>
                                                 @if ($value->status == 1)
                                                     <span class="label label-success">Active</span>
@@ -131,10 +94,10 @@
                                                 {{ date('d-m-Y H:i A', strtotime($value->created_at)) }}
                                             </td>
                                             <td>
-                                                <a href="{{ url('panel/admin/edit/' . $value->id) }}"
+                                                <a href="{{ url('panel/class/edit/' . $value->id) }}"
                                                     class="btn btn-default btn-rounded btn-sm"><span
                                                         class="fa fa-pencil"></span></a>
-                                                <a href="{{ url('panel/admin/delete/' . $value->id) }}"
+                                                <a href="{{ url('panel/class/delete/' . $value->id) }}"
                                                     onclick="return confirm('Are you sure do you want to delete?');"
                                                     class="btn btn-danger btn-rounded btn-sm"
                                                     onClick="delete_row('trow_1');"><span class="fa fa-times"></span></a>

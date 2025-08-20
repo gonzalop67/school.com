@@ -98,6 +98,6 @@ class AdminController extends Controller
         $user->is_delete = 1;
         $user->save();
 
-        return redirect('panel/admin')->with('success', "admin successfully deleted");
+        return redirect('panel/admin')->with('success', "Admin successfully deleted");
     }
 }

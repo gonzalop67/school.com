@@ -4,7 +4,7 @@
     <!-- START BREADCRUMB -->
     <ul class="breadcrumb">
         <li><a href="#">Home</a></li>
-        <li class="active">School</li>
+        <li class="active">Admin</li>
     </ul>
     <!-- END BREADCRUMB -->
 
