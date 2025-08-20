@@ -42,7 +42,7 @@
             </li>
         @endif
 
-        @if (Auth::user()->is_admin == 3)
+        @if (Auth::user()->is_admin == 1 || Auth::user()->is_admin == 2 || Auth::user()->is_admin == 3)
             <li class="{{ Request::segment(2) == 'teacher' ? 'active' : '' }}">
                 <a href="{{ url('panel/teacher') }}"><span class="fa fa-user"></span> <span
                         class="xn-text">Teacher</span></a>

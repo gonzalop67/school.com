@@ -160,13 +160,21 @@ class User extends Authenticatable
             $return = $return->where('status', '=', $status);
         }
 
+        if ($user_type == 3) {
+            $return = $return->where('created_by_id', '=', $user_id);
+        }
+
         $return = $return->where('is_admin', '=', 5)
-            ->where('created_by_id', '=', $user_id)
             ->where('is_delete', '=', 0)
             ->orderBy('id', 'desc')
             ->paginate(20);
 
         return $return;
+    }
+
+    public function getCreatedBy()
+    {
+        return $this->belongsTo(User::class, 'created_by_id');
     }
 
     public function getProfile()

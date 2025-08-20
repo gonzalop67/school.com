@@ -53,16 +53,20 @@
                                 <label>Gender</label>
                                 <select class="form-control" name="gender">
                                     <option value="">Select</option>
-                                    <option {{ (Request::get('gender') == 'Male' ? 'selected' : '') }} value="Male">Male</option>
-                                    <option {{ (Request::get('gender') == 'Female' ? 'selected' : '') }} value="Female">Female</option>
+                                    <option {{ Request::get('gender') == 'Male' ? 'selected' : '' }} value="Male">Male
+                                    </option>
+                                    <option {{ Request::get('gender') == 'Female' ? 'selected' : '' }} value="Female">
+                                        Female</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
                                 <label>Status</label>
                                 <select class="form-control" name="status">
                                     <option value="">Select</option>
-                                    <option {{ (Request::get('status') == '1' ? 'selected' : '') }} value="1">Active</option>
-                                    <option {{ (Request::get('status') == '100' ? 'selected' : '') }} value="100">Inactive</option>
+                                    <option {{ Request::get('status') == '1' ? 'selected' : '' }} value="1">Active
+                                    </option>
+                                    <option {{ Request::get('status') == '100' ? 'selected' : '' }} value="100">
+                                        Inactive</option>
                                 </select>
                             </div>
 
@@ -90,6 +94,9 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        @if (Auth::user()->is_admin == 1 || Auth::user()->is_admin == 2)
+                                            <th>School Name</th>
+                                        @endif
                                         <th>Profile</th>
                                         <th>First Name</th>
                                         <th>Last Name</th>
@@ -109,6 +116,13 @@
                                     @forelse ($getRecord as $value)
                                         <tr>
                                             <td>{{ $value->id }}</td>
+                                            @if (Auth::user()->is_admin == 1 || Auth::user()->is_admin == 2)
+                                                <td>
+                                                    @if (!empty($value->getCreatedBy))
+                                                        {{ $value->getCreatedBy->name }}
+                                                    @endif
+                                                </td>
+                                            @endif
                                             <td>
                                                 @if (!empty($value->getProfile()))
                                                     <img style="border: 0; width: 50px; border-radius: 50%;"
@@ -149,9 +163,9 @@
                                             </td>
                                         </tr>
                                     @empty
-                                    <tr>
-                                        <td colspan="100%">Record not found.</td>
-                                    </tr>
+                                        <tr>
+                                            <td colspan="100%">Record not found.</td>
+                                        </tr>
                                     @endforelse
                                 </tbody>
                             </table>
