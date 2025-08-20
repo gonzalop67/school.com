@@ -128,6 +128,16 @@ class User extends Authenticatable
         return $return;
     }
 
+    static function getSchoolAll()
+    {
+        return self::select('*')
+            ->where('is_admin', '=', 3)
+            ->where('is_delete', '=', 0)
+            ->where('status', '=', 1)
+            ->orderBy('id', 'desc')
+            ->paginate(20);
+    }
+
     static function getTeacher($user_id, $user_type)
     {
         $return = self::select('*');

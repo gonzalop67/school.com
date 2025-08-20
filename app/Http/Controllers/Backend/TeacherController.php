@@ -20,6 +20,7 @@ class TeacherController extends Controller
 
     public function create_teacher()
     {
+        $data['getSchool'] = User::getSchoolAll();
         $data['meta_title'] = "Create Teacher";
         return view('backend.teacher.create', $data);
     }
@@ -48,7 +49,13 @@ class TeacherController extends Controller
         $user->status            = trim($request->status);
 
         $user->is_admin = 5;
-        $user->created_by_id = Auth::user()->id;
+
+        if (Auth::user()->is_admin == 1 || Auth::user()->is_admin == 2) {
+            $user->created_by_id = $request->school_id;
+        } else {
+            $user->created_by_id = Auth::user()->id;
+        }
+
         $user->save();
 
         if (!empty($request->file('profile_pic'))) {
