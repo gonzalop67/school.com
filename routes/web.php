@@ -36,4 +36,7 @@ Route::group(['middleware' => 'school'], function () {
     Route::get('panel/teacher', [TeacherController::class, 'teacher_list']);
     Route::get('panel/teacher/create', [TeacherController::class, 'create_teacher']);
     Route::post('panel/teacher/create', [TeacherController::class, 'insert_teacher']);
+    Route::get('panel/teacher/edit/{id}', [TeacherController::class, 'edit_teacher']);
+    Route::post('panel/teacher/edit/{id}', [TeacherController::class, 'update_teacher']);
+    Route::get('panel/teacher/delete/{id}', [TeacherController::class, 'delete_teacher']);
 });
