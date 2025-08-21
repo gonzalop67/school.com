@@ -55,4 +55,6 @@ Route::group(['middleware' => 'school'], function () {
     Route::get('panel/class/edit/{id}', [ClassController::class, 'edit_class']);
     Route::post('panel/class/edit/{id}', [ClassController::class, 'update_class']);
     Route::get('panel/class/delete/{id}', [ClassController::class, 'delete_class']);
+
+    Route::get('panel/subject', [ClassController::class, 'class_list']);
 });
