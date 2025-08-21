@@ -52,7 +52,7 @@
                             <br>
                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-primary">Search</button>
-                                <a href="{{ url('panel/class') }}" class="btn btn-success">Reset</a>
+                                <a href="{{ url('panel/subject') }}" class="btn btn-success">Reset</a>
                             </div>
                         </form>
                     </div>
