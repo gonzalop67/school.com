@@ -29,7 +29,7 @@
                         <div class="panel-body">
 
                             <div class="form-group">
-                                <label class="col-md-3 col-xs-12 control-label">Name <span class="required">*</span></label>
+                                <label class="col-md-3 col-xs-12 control-label">Class Name <span class="required">*</span></label>
                                 <div class="col-md-6 col-xs-12">
                                     <div class="input-group">
                                         <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
