@@ -101,6 +101,9 @@
                                 <div class="col-md-6 col-xs-12">
                                     <select class="form-control" name="class_id" required>
                                         <option value="">Select</option>
+                                        @foreach ($getClass as $class)
+                                            <option value="{{ $class->id }}">{{ $class->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
