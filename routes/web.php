@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\SchoolAdminController;
 use App\Http\Controllers\Backend\TeacherController;
 use App\Http\Controllers\Backend\ClassController;
+use App\Http\Controllers\Backend\StudentController;
 use App\Http\Controllers\Backend\SubjectController;
 
 Route::get('/', [AuthController::class, 'login']);
@@ -42,6 +43,13 @@ Route::group(['middleware' => 'school'], function () {
     Route::get('panel/teacher/edit/{id}', [TeacherController::class, 'edit_teacher']);
     Route::post('panel/teacher/edit/{id}', [TeacherController::class, 'update_teacher']);
     Route::get('panel/teacher/delete/{id}', [TeacherController::class, 'delete_teacher']);
+
+    Route::get('panel/student', [StudentController::class, 'student_list']);
+    Route::get('panel/student/create', [StudentController::class, 'create_student']);
+    Route::post('panel/student/create', [StudentController::class, 'insert_student']);
+    Route::get('panel/student/edit/{id}', [StudentController::class, 'edit_student']);
+    Route::post('panel/student/edit/{id}', [StudentController::class, 'update_student']);
+    Route::get('panel/student/delete/{id}', [StudentController::class, 'delete_student']);
 
     Route::get('panel/school_admin', [SchoolAdminController::class, 'school_admin_list']);
     Route::get('panel/school_admin/create', [SchoolAdminController::class, 'create_school_admin']);
