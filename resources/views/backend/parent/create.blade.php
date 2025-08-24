@@ -1,0 +1,186 @@
+@extends('backend.layouts.app')
+
+@section('content')
+    <!-- START BREADCRUMB -->
+    <ul class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li class="active">Parent</li>
+    </ul>
+    <!-- END BREADCRUMB -->
+
+    <!-- PAGE TITLE -->
+    <div class="page-title">
+        <h2><span class="fa fa-arrow-circle-o-left"></span> Create Parent</h2>
+    </div>
+    <!-- END PAGE TITLE -->
+
+    <!-- PAGE CONTENT WRAPPER -->
+    <div class="page-content-wrap">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Create Parent</h3>
+                        </div>
+                        <div class="panel-body">
+
+                            @if (Auth::user()->is_admin == 1 || Auth::user()->is_admin == 2)
+                                <div class="form-group">
+                                    <label class="col-md-3 col-xs-12 control-label">School Name <span
+                                            class="required">*</span></label>
+                                    <div class="col-md-6 col-xs-12">
+                                        <select class="form-control SchoolChange" name="school_id" required>
+                                            <option value="">Select</option>
+                                            @foreach ($getSchool as $school)
+                                                <option value="{{ $school->id }}">{{ $school->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            @endif
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">First Name <span
+                                        class="required">*</span></label>
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                        <input type="text" name="name" class="form-control"
+                                            value="{{ old('name') }}" required />
+                                    </div>
+                                    <div class="required">{{ $errors->first('name') }}</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Last Name <span
+                                        class="required">*</span></label>
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                        <input type="text" name="last_name" class="form-control"
+                                            value="{{ old('last_name') }}" required />
+                                    </div>
+                                    <div class="required">{{ $errors->first('last_name') }}</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Occupation <span
+                                        class="required"></span></label>
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                        <input type="text" name="occupation" class="form-control"
+                                            value="{{ old('occupation') }}" />
+                                    </div>
+                                    <div class="required">{{ $errors->first('occupation') }}</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Gender <span
+                                        class="required">*</span></label>
+                                <div class="col-md-6 col-xs-12">
+                                    <select class="form-control" name="gender" required>
+                                        <option value="">Select</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Mobile Number <span
+                                        class="required"></span></label>
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                        <input type="text" name="mobile_number" class="form-control"
+                                            value="{{ old('mobile_number') }}" />
+                                    </div>
+                                    <div class="required">{{ $errors->first('mobile_number') }}</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Profile Pic</label>
+                                <div class="col-md-6 col-xs-12">
+                                    <input type="file" name="profile_pic" style="padding: 5px;"
+                                        class="form-control" />
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Current Address <span
+                                        class="required">*</span></label>
+                                <div class="col-md-6 col-xs-12">
+                                    <textarea name="address" class="form-control" required>{{ old('address') }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Permanent Address <span
+                                        class="required">*</span></label>
+                                <div class="col-md-6 col-xs-12">
+                                    <textarea name="permanent_address" class="form-control" required>{{ old('permanent_address') }}</textarea>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Email <span
+                                        class="required">*</span></label>
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                        <input type="text" name="email" class="form-control"
+                                            value="{{ old('email') }}" required />
+                                    </div>
+                                    <div class="required">{{ $errors->first('email') }}</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Password <span
+                                        class="required">*</span></label>
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
+                                        <input type="password" name="password" class="form-control" required />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Status <span
+                                        class="required">*</span></label>
+                                <div class="col-md-6 col-xs-12">
+                                    <select class="form-control" name="status" required>
+                                        <option value="1">Active</option>
+                                        <option value="0">Inactive</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="panel-footer">
+                            <button class="btn btn-primary pull-right">Submit</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- END PAGE CONTENT WRAPPER -->
+@endsection
+

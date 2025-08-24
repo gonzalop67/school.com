@@ -226,6 +226,50 @@ class User extends Authenticatable
         return $return;
     }
 
+    static function getParent($user_id, $user_type)
+    {
+        $return = self::select('*');
+
+        if (!empty(Request::get('id'))) {
+            $return = $return->where('id', '=', Request::get('id'));
+        }
+
+        if (!empty(Request::get('name'))) {
+            $return = $return->where('name', 'like', '%' . Request::get('name') . '%');
+        }
+
+        if (!empty(Request::get('last_name'))) {
+            $return = $return->where('last_name', 'like', '%' . Request::get('last_name') . '%');
+        }
+
+        if (!empty(Request::get('email'))) {
+            $return = $return->where('email', 'like', '%' . Request::get('email') . '%');
+        }
+
+        if (!empty(Request::get('gender'))) {
+            $return = $return->where('gender', '=', Request::get('gender'));
+        }
+
+        if (!empty(Request::get('status'))) {
+            $status = Request::get('status');
+            if ($status == 100) {
+                $status = 0;
+            }
+            $return = $return->where('status', '=', $status);
+        }
+
+        if ($user_type == 3) {
+            $return = $return->where('created_by_id', '=', $user_id);
+        }
+
+        $return = $return->where('is_admin', '=', 7)
+            ->where('is_delete', '=', 0)
+            ->orderBy('id', 'desc')
+            ->paginate(20);
+
+        return $return;
+    }
+
     static function getSchoolAdmin($user_id, $user_type)
     {
         $return = self::select('*');
