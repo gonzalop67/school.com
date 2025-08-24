@@ -19,6 +19,18 @@ class StudentController extends Controller
         return view('backend.student.list', $data);
     }
 
+    public function getclass(Request $request)
+    {
+        $getClass = ClassModel::getRecordActive($request->school_id);
+        $html = '';
+        $html .= '<option value="">Select</option>';
+        foreach ($getClass as $class) {
+            $html .= '<option value="' . $class->id . '">' . $class->name . '</option>';
+        }
+        $json['success'] = $html;
+        echo json_encode($json);
+    }
+
     public function create_student()
     {
         $data['getClass'] = ClassModel::getRecordActive(Auth::user()->id);
@@ -80,8 +92,9 @@ class StudentController extends Controller
 
     public function edit_student($id)
     {
-        $data['getClass'] = ClassModel::getRecordActive(Auth::user()->id);
-        $data['getRecord'] = User::getSingle($id);
+        $getRecord = User::getSingle($id);
+        $data['getRecord'] = $getRecord;
+        $data['getClass'] = ClassModel::getRecordActive($getRecord->created_by_id);
         $data['meta_title'] = "Edit Student";
         return view('backend.student.edit', $data);
     }

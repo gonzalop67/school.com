@@ -33,7 +33,7 @@
                                     <label class="col-md-3 col-xs-12 control-label">School Name <span
                                             class="required">*</span></label>
                                     <div class="col-md-6 col-xs-12">
-                                        <select class="form-control" name="school_id" required>
+                                        <select class="form-control SchoolChange" name="school_id" required>
                                             <option value="">Select</option>
                                             @foreach ($getSchool as $school)
                                                 <option value="{{ $school->id }}">{{ $school->name }}</option>
@@ -99,7 +99,7 @@
                                 <label class="col-md-3 col-xs-12 control-label">Class <span
                                         class="required">*</span></label>
                                 <div class="col-md-6 col-xs-12">
-                                    <select class="form-control" name="class_id" required>
+                                    <select class="form-control getClass" name="class_id" required>
                                         <option value="">Select</option>
                                         @foreach ($getClass as $class)
                                             <option value="{{ $class->id }}">{{ $class->name }}</option>
@@ -302,4 +302,22 @@
 @endsection
 
 @section('script')
+    <script>
+        $('body').delegate('.SchoolChange', 'change', function() {
+            var school_id = $(this).val();
+
+            $.ajax({
+                type: "POST",
+                url: "{{ url('panel/student/getclass') }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    school_id: school_id
+                },
+                dataType: "json",
+                success: function(response) {
+                    $('.getClass').html(response.success);
+                }
+            });
+        });
+    </script>
 @endsection
