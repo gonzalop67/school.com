@@ -7,16 +7,14 @@
             <a href="#" class="x-navigation-control"></a>
         </li>
         <li class="xn-profile">
-            <a href="#" class="profile-mini">
-                <img src="{{ url('') }}/public/assets/images/users/avatar.jpg" alt="John Doe" />
-            </a>
             <div class="profile">
                 <div class="profile-image">
-                    <img src="{{ url('') }}/public/assets/images/users/avatar.jpg" alt="John Doe" />
+                    <img src="{{ Auth::user()->getProfileLive() }}"
+                        style="width: 100px; height: 100px; object-fit: cover;" alt="{{ Auth::user()->name }}" />
                 </div>
                 <div class="profile-data">
-                    <div class="profile-data-name">John Doe</div>
-                    <div class="profile-data-title">Web Developer/Designer</div>
+                    <div class="profile-data-name">{{ Auth::user()->name }} {{ Auth::user()->last_name }}</div>
+                    {{-- <div class="profile-data-title">Web Developer/Designer</div> --}}
                 </div>
                 <div class="profile-controls">
                     <a href="pages-profile.html" class="profile-control-left"><span class="fa fa-info"></span></a>
@@ -25,10 +23,27 @@
             </div>
         </li>
 
-        <li class="{{ Request::segment(2) == 'dashboard' ? 'active' : '' }}">
-            <a href="{{ url('panel/dashboard') }}"><span class="fa fa-desktop"></span> <span
-                    class="xn-text">Dashboard</span></a>
-        </li>
+        @if (Auth::user()->is_admin == 1 || Auth::user()->is_admin == 2)
+            <li class="{{ Request::segment(2) == 'dashboard' ? 'active' : '' }}">
+                <a href="{{ url('panel/dashboard') }}"><span class="fa fa-desktop"></span> <span
+                        class="xn-text">Dashboard</span></a>
+            </li>
+        @elseif (Auth::user()->is_admin == 5)
+            <li class="{{ Request::segment(2) == 'dashboard' ? 'active' : '' }}">
+                <a href="{{ url('teacher/dashboard') }}"><span class="fa fa-desktop"></span> <span
+                        class="xn-text">Dashboard</span></a>
+            </li>
+        @elseif (Auth::user()->is_admin == 6)
+            <li class="{{ Request::segment(2) == 'dashboard' ? 'active' : '' }}">
+                <a href="{{ url('student/dashboard') }}"><span class="fa fa-desktop"></span> <span
+                        class="xn-text">Dashboard</span></a>
+            </li>
+        @elseif (Auth::user()->is_admin == 7)
+            <li class="{{ Request::segment(2) == 'dashboard' ? 'active' : '' }}">
+                <a href="{{ url('parent/dashboard') }}"><span class="fa fa-desktop"></span> <span
+                        class="xn-text">Dashboard</span></a>
+            </li>
+        @endif
 
         @if (Auth::user()->is_admin == 1 || Auth::user()->is_admin == 2)
             <li class="{{ Request::segment(2) == 'admin' ? 'active' : '' }}">
@@ -65,12 +80,15 @@
         @endif
 
         @if (Auth::user()->is_admin == 3)
-            <li class="xn-openable {{ (Request::segment(2) == 'class' || Request::segment(2) == 'subject') ? 'active' : '' }}">
+            <li
+                class="xn-openable {{ Request::segment(2) == 'class' || Request::segment(2) == 'subject' ? 'active' : '' }}">
                 <a href="#"><span class="fa fa-file-text-o"></span> <span class="xn-text">Academics</span></a>
                 <ul>
-                    <li class="{{ Request::segment(2) == 'class' ? 'active' : '' }}"><a href="{{ url('panel/class') }}"><span class="fa fa-random"></span> Class</a></li>
+                    <li class="{{ Request::segment(2) == 'class' ? 'active' : '' }}"><a
+                            href="{{ url('panel/class') }}"><span class="fa fa-random"></span> Class</a></li>
 
-                    <li class="{{ Request::segment(2) == 'subject' ? 'active' : '' }}"><a href="{{ url('panel/subject') }}"><span class="fa fa-random"></span> Subject</a></li>
+                    <li class="{{ Request::segment(2) == 'subject' ? 'active' : '' }}"><a
+                            href="{{ url('panel/subject') }}"><span class="fa fa-random"></span> Subject</a></li>
                 </ul>
             </li>
         @endif
