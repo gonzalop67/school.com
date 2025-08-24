@@ -162,8 +162,7 @@
                                                         class="fa fa-pencil"></span></a>
                                                 <a href="{{ url('panel/student/delete/' . $value->id) }}"
                                                     onclick="return confirm('Are you sure do you want to delete?');"
-                                                    class="btn btn-danger btn-rounded btn-sm"
-                                                    onClick="delete_row('trow_1');"><span class="fa fa-times"></span></a>
+                                                    class="btn btn-danger btn-rounded btn-sm"><span class="fa fa-times"></span></a>
                                             </td>
                                         </tr>
                                     @empty

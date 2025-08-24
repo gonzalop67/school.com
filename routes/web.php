@@ -47,9 +47,9 @@ Route::group(['middleware' => 'school'], function () {
     Route::get('panel/student', [StudentController::class, 'student_list']);
     Route::get('panel/student/create', [StudentController::class, 'create_student']);
     Route::post('panel/student/create', [StudentController::class, 'insert_student']);
-    // Route::get('panel/student/edit/{id}', [StudentController::class, 'edit_student']);
-    // Route::post('panel/student/edit/{id}', [StudentController::class, 'update_student']);
-    // Route::get('panel/student/delete/{id}', [StudentController::class, 'delete_student']);
+    Route::get('panel/student/edit/{id}', [StudentController::class, 'edit_student']);
+    Route::post('panel/student/edit/{id}', [StudentController::class, 'update_student']);
+    Route::get('panel/student/delete/{id}', [StudentController::class, 'delete_student']);
 
     Route::get('panel/school_admin', [SchoolAdminController::class, 'school_admin_list']);
     Route::get('panel/school_admin/create', [SchoolAdminController::class, 'create_school_admin']);
