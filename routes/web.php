@@ -2,15 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Backend\DashboardController;
-use App\Http\Controllers\Backend\SchoolController;
+use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\AdminController;
-use App\Http\Controllers\Backend\SchoolAdminController;
-use App\Http\Controllers\Backend\TeacherController;
 use App\Http\Controllers\Backend\ClassController;
+use App\Http\Controllers\Backend\ParentController;
+use App\Http\Controllers\Backend\SchoolController;
 use App\Http\Controllers\Backend\StudentController;
 use App\Http\Controllers\Backend\SubjectController;
-use App\Http\Controllers\Backend\ParentController;
+use App\Http\Controllers\Backend\TeacherController;
+use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\SchoolAdminController;
 
 Route::get('/', [AuthController::class, 'login']);
 Route::post('/', [AuthController::class, 'auth_login']);
@@ -18,7 +19,8 @@ Route::get('forgot', [AuthController::class, 'forgot']);
 Route::get('logout', [AuthController::class, 'logout']);
 
 Route::group(['middleware' => 'common'], function () {
-
+    Route::get('panel/change-password', [UserController::class, 'change_password']);
+    Route::post('panel/change-password', [UserController::class, 'update_password']);
 });
 
 Route::group(['middleware' => 'admin'], function () {

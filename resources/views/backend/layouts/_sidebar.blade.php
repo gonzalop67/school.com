@@ -93,6 +93,10 @@
             </li>
         @endif
 
+        <li class="{{ Request::segment(2) == 'change-password' ? 'active' : '' }}">
+            <a href="{{ url('panel/change-password') }}"><span class="fa fa-key"></span> <span
+                    class="xn-text">Change Password</span></a>
+        </li>
 
         <li class="xn-openable">
             <a href="#"><span class="fa fa-file-text-o"></span> <span class="xn-text">Layouts</span></a>
