@@ -21,7 +21,15 @@ class AuthController extends Controller
     {
         // $remember = !empty($request->remember);
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'is_delete' => 0], true)) {
-            return redirect('panel/dashboard');
+            if (Auth::user()->is_admin == 5) {
+                return redirect('teacher/dashboard');
+            } else if (Auth::user()->is_admin == 6) {
+                return redirect('student/dashboard');
+            } else if (Auth::user()->is_admin == 7) {
+                return redirect('parent/dashboard');
+            } else {
+                return redirect('panel/dashboard');
+            }
         } else {
             return redirect()->back()->with('error', "Please enter correct email and password");
         }
