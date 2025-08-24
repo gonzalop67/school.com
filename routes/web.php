@@ -59,13 +59,16 @@ Route::group(['middleware' => 'school'], function () {
     Route::get('panel/parent/edit/{id}', [ParentController::class, 'edit_parent']);
     Route::post('panel/parent/edit/{id}', [ParentController::class, 'update_parent']);
     Route::get('panel/parent/delete/{id}', [ParentController::class, 'delete_parent']);
+    Route::get('panel/parent/delete/{id}', [ParentController::class, 'delete_parent']);
+    Route::get('panel/parent/my-student/{id}', [ParentController::class, 'my_student']);
+    Route::get('panel/parent/add-student/{student_id}/{parent_id}', [ParentController::class, 'add_student']);
+    Route::get('panel/parent/my-student-delete/{student_id}', [ParentController::class, 'my_student_delete']);
 
     Route::get('panel/school_admin', [SchoolAdminController::class, 'school_admin_list']);
     Route::get('panel/school_admin/create', [SchoolAdminController::class, 'create_school_admin']);
     Route::post('panel/school_admin/create', [SchoolAdminController::class, 'insert_school_admin']);
     Route::get('panel/school_admin/edit/{id}', [SchoolAdminController::class, 'edit_school_admin']);
     Route::post('panel/school_admin/edit/{id}', [SchoolAdminController::class, 'update_school_admin']);
-    Route::get('panel/school_admin/delete/{id}', [SchoolAdminController::class, 'delete_school_admin']);
 
     Route::get('panel/class', [ClassController::class, 'class_list']);
     Route::get('panel/class/create', [ClassController::class, 'create_class']);

@@ -270,6 +270,18 @@ class User extends Authenticatable
         return $return;
     }
 
+    static function getParentMyStudent($parent_id)
+    {
+        $return = self::select('*')
+            ->where('parent_id', '=', $parent_id)
+            ->where('is_admin', '=', 6)
+            ->where('is_delete', '=', 0)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return $return;
+    }
+
     static function getSchoolAdmin($user_id, $user_type)
     {
         $return = self::select('*');
@@ -313,6 +325,11 @@ class User extends Authenticatable
     public function getCreatedBy()
     {
         return $this->belongsTo(User::class, 'created_by_id');
+    }
+
+    public function getParentData()
+    {
+        return $this->belongsTo(User::class, 'parent_id');
     }
 
     public function getClass()
