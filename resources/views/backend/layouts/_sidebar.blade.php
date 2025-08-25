@@ -81,7 +81,7 @@
 
         @if (Auth::user()->is_admin == 3)
             <li
-                class="xn-openable {{ Request::segment(2) == 'class' || Request::segment(2) == 'subject' ? 'active' : '' }}">
+                class="xn-openable {{ Request::segment(2) == 'class' || Request::segment(2) == 'subject' || Request::segment(2) == 'assign-subject' ? 'active' : '' }}">
                 <a href="#"><span class="fa fa-file-text-o"></span> <span class="xn-text">Academics</span></a>
                 <ul>
                     <li class="{{ Request::segment(2) == 'class' ? 'active' : '' }}"><a
@@ -89,18 +89,21 @@
 
                     <li class="{{ Request::segment(2) == 'subject' ? 'active' : '' }}"><a
                             href="{{ url('panel/subject') }}"><span class="fa fa-random"></span> Subject</a></li>
+
+                    <li class="{{ Request::segment(2) == 'assign-subject' ? 'active' : '' }}"><a
+                            href="{{ url('panel/assign-subject') }}"><span class="fa fa-random"></span> Assign Subject</a></li>
                 </ul>
             </li>
         @endif
 
         <li class="{{ Request::segment(2) == 'my-account' ? 'active' : '' }}">
-            <a href="{{ url('panel/my-account') }}"><span class="fa fa-user"></span> <span
-                    class="xn-text">My Account</span></a>
+            <a href="{{ url('panel/my-account') }}"><span class="fa fa-user"></span> <span class="xn-text">My
+                    Account</span></a>
         </li>
 
         <li class="{{ Request::segment(2) == 'change-password' ? 'active' : '' }}">
-            <a href="{{ url('panel/change-password') }}"><span class="fa fa-key"></span> <span
-                    class="xn-text">Change Password</span></a>
+            <a href="{{ url('panel/change-password') }}"><span class="fa fa-key"></span> <span class="xn-text">Change
+                    Password</span></a>
         </li>
 
     </ul>

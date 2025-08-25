@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Models\SubjectModel;
 use Illuminate\Http\Request;
+use App\Models\SubjectClassModel;
 use App\Http\Controllers\Controller;
+use App\Models\ClassModel;
 use Illuminate\Support\Facades\Auth;
 
 class SubjectController extends Controller
@@ -59,5 +61,42 @@ class SubjectController extends Controller
         $save->save();
 
         return redirect('panel/subject')->with('success', "Subject successfully deleted");
+    }
+
+    public function assign_subject_list(Request $request)
+    {
+        $data['getRecord'] = SubjectClassModel::getRecord(Auth::user()->id, Auth::user()->is_admin);
+        $data['meta_title'] = "Assign Subject Class";
+        return view('backend.assign_subject.list', $data);
+    }
+
+    public function create_assign_subject()
+    {
+        $data['getClass'] = ClassModel::getRecordActive(Auth::user()->id);
+        $data['getSubject'] = SubjectModel::getRecordActive(Auth::user()->id);
+
+        $data['meta_title'] = "Create Assign Subject";
+        return view('backend.assign_subject.create', $data);
+    }
+
+    public function insert_assign_subject(Request $request)
+    {
+        if (!empty($request->class_id) && !empty($request->subject_id)) {
+            foreach ($request->subject_id as $subject_id) {
+                if (!empty($subject_id)) {
+                    $check = SubjectClassModel::checkClassSubject(Auth::user()->id, $request->class_id, $subject_id);
+                    if (empty($check)) {
+                        $save             = new SubjectClassModel;
+                        $save->class_id   = trim($request->class_id);
+                        $save->subject_id = trim($subject_id);
+                        $save->status     = trim($request->status);
+                        $save->created_by_id = Auth::user()->id;
+                        $save->save();
+                    }
+                }
+            }
+        }
+
+        return redirect('panel/assign-subject')->with('success', "Assign Subject Class Successfully Created");
     }
 }
