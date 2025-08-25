@@ -21,6 +21,8 @@ Route::get('logout', [AuthController::class, 'logout']);
 Route::group(['middleware' => 'common'], function () {
     Route::get('panel/change-password', [UserController::class, 'change_password']);
     Route::post('panel/change-password', [UserController::class, 'update_password']);
+    Route::get('panel/my-account', [UserController::class, 'my_account']);
+    Route::post('panel/my-account', [UserController::class, 'update_account']);
 });
 
 Route::group(['middleware' => 'admin'], function () {

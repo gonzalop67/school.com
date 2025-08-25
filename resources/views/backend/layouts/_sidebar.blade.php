@@ -93,16 +93,14 @@
             </li>
         @endif
 
+        <li class="{{ Request::segment(2) == 'my-account' ? 'active' : '' }}">
+            <a href="{{ url('panel/my-account') }}"><span class="fa fa-user"></span> <span
+                    class="xn-text">My Account</span></a>
+        </li>
+
         <li class="{{ Request::segment(2) == 'change-password' ? 'active' : '' }}">
             <a href="{{ url('panel/change-password') }}"><span class="fa fa-key"></span> <span
                     class="xn-text">Change Password</span></a>
-        </li>
-
-        <li class="xn-openable">
-            <a href="#"><span class="fa fa-file-text-o"></span> <span class="xn-text">Layouts</span></a>
-            <ul>
-                <li><a href="layout-boxed.html">List</a></li>
-            </ul>
         </li>
 
     </ul>
