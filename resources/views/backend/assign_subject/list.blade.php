@@ -35,9 +35,14 @@
                                     value="{{ Request::get('id') }}">
                             </div>
                             <div class="col-md-2">
-                                <label>Name</label>
-                                <input type="text" name="name" class="form-control" placeholder="admin Name"
-                                    value="{{ Request::get('name') }}">
+                                <label>Class Name</label>
+                                <input type="text" name="class_name" class="form-control" placeholder="Class Name"
+                                    value="{{ Request::get('class_name') }}">
+                            </div>
+                            <div class="col-md-2">
+                                <label>Subject Name</label>
+                                <input type="text" name="subject_name" class="form-control" placeholder="Subject Name"
+                                    value="{{ Request::get('subject_name') }}">
                             </div>
                             <div class="col-md-2">
                                 <label>Status</label>

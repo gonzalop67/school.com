@@ -99,4 +99,48 @@ class SubjectController extends Controller
 
         return redirect('panel/assign-subject')->with('success', "Assign Subject Class Successfully Created");
     }
+
+    public function edit_assign_subject($id)
+    {
+        $getRecord = SubjectClassModel::getSingle($id);
+        $data['getRecord'] = $getRecord;
+        $data['getSelectedSubject'] = SubjectClassModel::getSelectedSubject($getRecord->class_id, Auth::user()->id);
+
+        $data['getClass'] = ClassModel::getRecordActive(Auth::user()->id);
+        $data['getSubject'] = SubjectModel::getRecordActive(Auth::user()->id);
+
+        $data['meta_title'] = "Edit Assign Subject";
+        return view('backend.assign_subject.edit', $data);
+    }
+
+    public function update_assign_subject($id, Request $request)
+    {
+        if (!empty($request->class_id)) {
+            SubjectClassModel::deleteClassSubject($request->class_id, Auth::user()->id);
+            foreach ($request->subject_id as $subject_id) {
+                if (!empty($subject_id)) {
+                    $check = SubjectClassModel::checkClassSubject(Auth::user()->id, $request->class_id, $subject_id);
+                    if (empty($check)) {
+                        $save             = new SubjectClassModel;
+                        $save->class_id   = trim($request->class_id);
+                        $save->subject_id = trim($subject_id);
+                        $save->status     = trim($request->status);
+                        $save->created_by_id = Auth::user()->id;
+                        $save->save();
+                    }
+                }
+            }
+        }
+
+        return redirect('panel/assign-subject')->with('success', "Assign Subject Class Successfully Updated");
+    }
+
+    public function delete_assign_subject($id)
+    {
+        $save = SubjectClassModel::getSingle($id);
+        $save->is_delete = 1;
+        $save->save();
+
+        return redirect('panel/assign-subject')->with('success', "Assign Subject Class Successfully Deleted");
+    }
 }
